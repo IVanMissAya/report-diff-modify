@@ -1,37 +1,86 @@
-# report-diff-modify
+# Report Diff & Modify Skill
 
-#### 介绍
-报告审核 Agent Skill
+报告差异比对与自动修改技能
 
-#### 软件架构
-软件架构说明
+## 快速开始
 
+### 安装依赖
 
-#### 安装教程
+```bash
+pip install -r requirements.txt
+```
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+### 基本使用
 
-#### 使用说明
+```python
+from report_diff_modify import report_diff_modify
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+# 调用技能
+result = report_diff_modify(
+    pdf_path="path/to/your/report.pdf",
+    api_json={
+        "reportNo": "NEW-001",
+        "goodsName1": "新产品名称",
+        "aCompanyName": "新公司名称",
+        "issueTime": "2026-01-01"
+    }
+)
 
-#### 参与贡献
+# 查看结果
+print(result)
+```
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+### 在 OpenClaw 中使用
 
+将此技能目录放置在 `~/.openclaw/workspace/skills/report-diff-modify` 下，然后在对话中调用即可。
 
-#### 特技
+## API 参考
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+### report_diff_modify()
+
+```python
+def report_diff_modify(
+    pdf_path: str,
+    api_json: Dict[str, str],
+    extract_rules: List[Dict] = None,
+    output_prefix: str = "修改后_"
+) -> Dict[str, Any]
+```
+
+**参数:**
+- `pdf_path`: PDF 文件路径
+- `api_json`: 用于比对的外部 JSON 数据
+- `extract_rules`: 提取规则（可选）
+- `output_prefix`: 输出文件前缀（可选）
+
+**返回:**
+```json
+{
+  "success": true,
+  "extracted_json": {...},
+  "differences": [...],
+  "new_file_path": "path/to/new/file.pdf",
+  "message": "操作成功"
+}
+```
+
+## 文件结构
+
+```
+report-diff-modify/
+├── SKILL.md              # 技能描述（OpenClaw 读取）
+├── report_diff_modify.py # 核心功能代码
+├── example_usage.py      # 使用示例
+├── requirements.txt      # Python 依赖
+└── README.md             # 本文件
+```
+
+## 注意事项
+
+1. PDF 文件需要有文本层（非扫描图片）
+2. 确保文件没有被其他程序占用
+3. 修改后的文件保存在原文件同目录下
+
+## 版本历史
+
+- v1.0.0 - 初始版本

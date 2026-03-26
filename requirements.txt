@@ -1,0 +1,8 @@
+# PDF处理核心依赖
+PyMuPDF>=1.23.0
+pypdf>=3.0.0
+
+# FastAPI Web服务依赖
+fastapi>=0.100.0
+uvicorn[standard]>=0.23.0
+python-multipart>=0.0.6
