@@ -27,9 +27,8 @@ app.add_middleware(
 # --------------------------
 # 硬编码输出目录（你指定的路径）
 # --------------------------
-FIXED_OUTPUT_DIR = (
-    r"D:\code_files\anci_work\报告审核\模板\危险特性分类鉴别报告\modified"
-)
+from config import FIXED_OUTPUT_DIR, TEMP_DIR, HOST, PORT
+
 # 自动创建目录（不存在则新建）
 os.makedirs(FIXED_OUTPUT_DIR, exist_ok=True)
 
